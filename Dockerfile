@@ -7,7 +7,7 @@ RUN apt-get install -y git && \
     apt-get install gzip && \
     apt-get install ca-certificates
 # cpp
-RUN apt-get install gcc g++
+RUN apt-get install -y gcc g++
 # install pip
 RUN apt-get install -y python3-pip && \
     # update pip
