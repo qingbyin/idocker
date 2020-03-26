@@ -2,7 +2,7 @@ FROM ubuntu:bionic
 RUN apt-get update
 # necessary for CircleCI
 RUN apt-get install -y git
-RUN apt-get install ssh
+RUN apt-get install -y ssh
 RUN apt-get install tar
 RUN apt-get install gzip
 RUN apt-get install ca-certificates
