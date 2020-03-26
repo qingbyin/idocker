@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - checkout
-
-      - run: docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_PASSWORD
+      # use stdin prevents the password from ending up in the shell's history or log-files.
+      - run: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
       - run: docker build -t $DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG .
       - run: docker push $DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG && sleep 10
