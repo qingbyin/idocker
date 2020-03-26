@@ -15,7 +15,7 @@ RUN apt-get install -y python3-pip && \
 # install latest cmake
 RUN pip3 install cmake
 # doc
-RUN apt-get install doxygen && \
+RUN apt-get install -y doxygen && \
     pip3 install -U sphinx && \
     pip3 install sphinx_rtd_theme && \
     pip3 install breathe
