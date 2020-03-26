@@ -1,14 +1,14 @@
 version: 2.1
 jobs:
-  build:
-    machine:
-      image: ubuntu-1604:201903-01
+  build-docker:
     environment:
       IMAGE_NAME: qyin-env
-      IMAGE_TAG: 2020
+      IMAGE_TAG: latest
       # set Docker Hub username & password in CircleCI
       # DOCKER_USERNAME
       # DOCKER_PASSWORD
+    machine:
+      image: ubuntu-1604:201903-01
 
     steps:
       - checkout
