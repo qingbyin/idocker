@@ -1,3 +1,4 @@
+# use ubuntu
 FROM ubuntu:bionic
 RUN apt-get update
 # necessary for CircleCI
