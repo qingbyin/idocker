@@ -11,7 +11,10 @@ RUN apt-get install -y git && \
 RUN apt-get install -y gcc g++ && \
     apt-get install ninja-build
 # libs
-RUN apt-get install -y libeigen3-dev
+RUN apt-get install -y \
+    libeigen3-dev \
+    libmpich-dev \
+    mpich
 # install pip
 RUN apt-get install -y python3-pip && \
     # update pip
