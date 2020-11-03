@@ -18,15 +18,15 @@ RUN apt-get install -y gcc g++ && \
     apt-get install ninja-build
 # libs
 # latest eigen3
-RUN git clone https://gitlab.com/libeigen/eigen.git ~/eigen\
-    cd ~/eigen \
-    cmake -G Ninja .\
-    ninja install \
-    cd ~ \
+RUN git clone https://gitlab.com/libeigen/eigen.git ~/eigen && \
+    cd ~/eigen && \
+    cmake -G Ninja . && \
+    ninja install && \
+    cd ~ && \
     rm -rf ~/eigen
 # latest boost
-RUN add-apt-repository ppa:mhier/libboost-latest \
-    apt update \
+RUN add-apt-repository ppa:mhier/libboost-latest && \
+    apt update && \
     apt-get install -y libboost1.74-dev
 # mpi
 RUN apt-get install -y \
