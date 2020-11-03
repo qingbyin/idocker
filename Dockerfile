@@ -2,7 +2,7 @@
 FROM ubuntu:bionic
 RUN apt-get update
 # get add-apt-repository command
-RUN apt-get install software-properties-common
+RUN apt-get install -y software-properties-common
 # necessary for CircleCI
 RUN apt-get install -y git && \
     apt-get install -y ssh && \
