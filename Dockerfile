@@ -20,7 +20,7 @@ RUN apt-get install -y gcc g++ && \
 # latest eigen3
 RUN git clone https://gitlab.com/libeigen/eigen.git ~/eigen && \
     cd ~/eigen && mkdir build && cd build \
-    cmake .. && \
+    cmake ../ && \
     make install && \
     cd ~ && \
     rm -rf ~/eigen
