@@ -20,8 +20,8 @@ RUN apt-get install -y gcc g++ && \
 # latest eigen3
 RUN git clone https://gitlab.com/libeigen/eigen.git ~/eigen && \
     cd ~/eigen && mkdir build && cd build \
-    cmake -G Ninja .. && \
-    ninja install && \
+    cmake .. && \
+    make install && \
     cd ~ && \
     rm -rf ~/eigen
 # latest boost
