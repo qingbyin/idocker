@@ -7,20 +7,31 @@ RUN apt-get install -y git && \
     apt-get install tar && \
     apt-get install gzip && \
     apt-get install ca-certificates
-# cpp
-RUN apt-get install -y gcc g++ && \
-    apt-get install ninja-build
-# libs
-RUN apt-get install -y \
-    libeigen3-dev \
-    libmpich-dev \
-    mpich
 # install pip
 RUN apt-get install -y python3-pip && \
     # update pip
     pip3 install --upgrade pip
 # install latest cmake
 RUN pip3 install cmake
+# cpp
+RUN apt-get install -y gcc g++ && \
+    apt-get install ninja-build
+# libs
+# latest eigen3
+RUN git clone https://gitlab.com/libeigen/eigen.git ~/eigen\
+    cd ~/eigen \
+    cmake -G Ninja .\
+    ninja install \
+    cd ~ \
+    rm -rf ~/eigen
+# latest boost
+RUN add-apt-repository ppa:mhier/libboost-latest \
+    apt update \
+    apt-get install -y libboost1.74-dev
+# mpi
+RUN apt-get install -y \
+    libmpich-dev \
+    mpich
 # doc
 RUN apt-get install -y doxygen && \
     pip3 install -U sphinx && \
