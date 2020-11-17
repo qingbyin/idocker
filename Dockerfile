@@ -20,7 +20,8 @@ RUN pip3 install cmake
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test && \
     apt-get update && \
     apt-get install -y gcc-10 && \
-    ln -sf /usr/bin/g++-10 /usr/bin/g++
+    ln -sf /usr/bin/g++-10 /usr/bin/g++ && \
+    ln -sf /usr/bin/gcc-10 /usr/bin/gcc
 RUN apt-get install ninja-build
 # libs
 # latest eigen3
