@@ -16,8 +16,11 @@ RUN apt-get install -y python3-pip && \
 # install latest cmake
 RUN pip3 install cmake
 # cpp
-RUN apt-get install -y gcc g++ && \
-    apt-get install ninja-build
+# latest g++
+RUN add-apt-repository ppa:ubuntu-toolchain-r/test && \
+    apt-get update && \
+    apt-get install -y gcc-10
+RUN apt-get install ninja-build
 # libs
 # latest eigen3
 RUN git clone https://gitlab.com/libeigen/eigen.git ~/eigen && \
