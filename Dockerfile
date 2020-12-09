@@ -39,6 +39,25 @@ RUN add-apt-repository ppa:mhier/libboost-latest && \
 RUN apt-get install -y \
     libmpich-dev \
     mpich
+# PETSc
+RUN git clone -b release https://gitlab.com/petsc/petsc.git petsc && \
+    cd petsc && \
+    ./configure \
+    --with-64-bit-indices=yes \
+    --with-fortran-bindings=no \
+    --with-shared-libraries \
+    --download-ptscotch && \
+    rm -rf \
+    ./**/tests/ \
+    ./**/obj/ \
+    ./**/externalpackages/  \
+    ./CTAGS \
+    ./RDict.log \
+    ./TAGS \
+    ./docs/ \
+    ./share/ \
+    ./src/ \
+    ./systems/
 # doc
 RUN apt-get install -y doxygen && \
     pip3 install -U sphinx && \
