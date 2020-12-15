@@ -14,7 +14,9 @@ RUN apt-get install -y python3-pip && \
     # update pip
     pip3 install --upgrade pip
 # install latest cmake
-RUN pip3 install cmake
+RUN pip3 install cmake && \
+    # Some packages need pkg-confg (e.g. PETSc)
+    apt-get install -y pkg-config
 # cpp
 # latest g++
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test && \
@@ -40,13 +42,22 @@ RUN apt-get install -y \
     libmpich-dev \
     mpich
 # PETSc
-RUN git clone -b release https://gitlab.com/petsc/petsc.git petsc && \
-    cd petsc && \
+ENV PETSC_DIR=$HOME/petsc
+ENV PETSC_ARCH=linux-gnu-real-64
+RUN git clone -b release https://gitlab.com/petsc/petsc.git ${PETSC_DIR} && \
+    cd ${PETSC_DIR} && \
     ./configure \
+    PETSC_ARCH=linux-gnu-real-64 \
     --with-64-bit-indices=yes \
     --with-fortran-bindings=no \
     --with-shared-libraries \
+    # Install dependencies: BLAS/LAPACK
+    --download-fblaslapack \
+    # PTScotch lib
     --download-ptscotch && \
+    # Compile
+    make PETSC_ARCH=linux-gnu-real-64 all && \
+    # Clean
     rm -rf \
     ./**/tests/ \
     ./**/obj/ \
