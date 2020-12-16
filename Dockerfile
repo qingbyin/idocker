@@ -44,6 +44,8 @@ RUN apt-get install -y \
 # PETSc
 ENV PETSC_DIR=$HOME/petsc
 ENV PETSC_ARCH=linux-gnu-real-64
+# needed by PTScotch
+RUN apt-get install -y bison flex
 RUN git clone -b release https://gitlab.com/petsc/petsc.git ${PETSC_DIR} && \
     cd ${PETSC_DIR} && \
     ./configure \
