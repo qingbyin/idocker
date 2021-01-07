@@ -1,5 +1,9 @@
 # use ubuntu
 FROM ubuntu:bionic
+
+# Work in the tmp directory
+WORKDIR /tmp
+
 RUN apt-get update
 # get add-apt-repository command
 RUN apt-get install -y software-properties-common
@@ -17,6 +21,10 @@ RUN apt-get install -y python3-pip && \
 RUN pip3 install cmake && \
     # Some packages need pkg-confg (e.g. PETSc)
     apt-get install -y pkg-config
+# Install fiat, ufl, ffcx
+RUN pip3 install git+https://github.com/FEniCS/fiat.git --upgrade && \
+    pip3 install git+https://github.com/FEniCS/ufl.git --upgrade  && \
+    pip3 install git+https://github.com/FEniCS/ffcx.git --upgrade
 # cpp
 # latest g++
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test && \
