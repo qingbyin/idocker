@@ -49,6 +49,8 @@ RUN add-apt-repository ppa:mhier/libboost-latest && \
 RUN apt-get install -y \
     libmpich-dev \
     mpich
+# HDF5 for mpich
+RUN apt install -y libhdf5-mpich-dev
 # PETSc
 ENV PETSC_DIR=$HOME/petsc
 ENV PETSC_ARCH=linux-gnu-real-64
