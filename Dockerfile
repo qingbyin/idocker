@@ -1,5 +1,5 @@
 # use ubuntu
-FROM ubuntu:bionic
+FROM ubuntu:20.04
 
 # Work in the tmp directory
 WORKDIR /tmp
@@ -41,10 +41,8 @@ RUN git clone https://gitlab.com/libeigen/eigen.git ~/eigen && \
     make install && \
     cd ~ && \
     rm -rf ~/eigen
-# latest boost
-RUN add-apt-repository ppa:mhier/libboost-latest && \
-    apt update && \
-    apt-get install -y libboost1.74-dev
+# boost
+RUN apt-get install -y libboost1.74-dev libboost-filesystem-dev
 # mpi
 RUN apt-get install -y \
     libmpich-dev \
