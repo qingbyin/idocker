@@ -42,7 +42,7 @@ RUN git clone https://gitlab.com/libeigen/eigen.git ~/eigen && \
     cd ~ && \
     rm -rf ~/eigen
 # boost
-RUN apt-get install -y libboost1.74-dev libboost-filesystem-dev
+RUN apt-get install -y libboost1.74-dev
 # mpi
 RUN apt-get install -y \
     libmpich-dev \
