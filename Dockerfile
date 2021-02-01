@@ -21,10 +21,6 @@ RUN apt-get install -y python3-pip && \
 RUN pip3 install cmake && \
     # Some packages need pkg-confg (e.g. PETSc)
     apt-get install -y pkg-config
-# Install basix, ufl, ffcx
-RUN pip3 install git+https://github.com/FEniCS/basix.git --upgrade && \
-    pip3 install git+https://github.com/FEniCS/ufl.git --upgrade  && \
-    pip3 install git+https://github.com/FEniCS/ffcx.git --upgrade
 # cpp
 # latest g++
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test && \
@@ -41,6 +37,10 @@ RUN git clone https://gitlab.com/libeigen/eigen.git ~/eigen && \
     make install && \
     cd ~ && \
     rm -rf ~/eigen
+# Install basix (require Eigen3), ufl, ffcx
+RUN pip3 install git+https://github.com/FEniCS/basix.git --upgrade && \
+    pip3 install git+https://github.com/FEniCS/ufl.git --upgrade  && \
+    pip3 install git+https://github.com/FEniCS/ffcx.git --upgrade
 # boost
 RUN apt-get install -y libboost1.74-dev
 # mpi
