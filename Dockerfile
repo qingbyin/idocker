@@ -42,7 +42,7 @@ RUN pip3 install git+https://github.com/FEniCS/basix.git --upgrade && \
     pip3 install git+https://github.com/FEniCS/ufl.git --upgrade  && \
     pip3 install git+https://github.com/FEniCS/ffcx.git --upgrade
 # boost
-RUN apt-get install -y libboost1.74-dev
+RUN apt-get install -y libboost-dev
 # mpi
 RUN apt-get install -y \
     libmpich-dev \
