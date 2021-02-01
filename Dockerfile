@@ -21,8 +21,8 @@ RUN apt-get install -y python3-pip && \
 RUN pip3 install cmake && \
     # Some packages need pkg-confg (e.g. PETSc)
     apt-get install -y pkg-config
-# Install fiat, ufl, ffcx
-RUN pip3 install git+https://github.com/FEniCS/fiat.git --upgrade && \
+# Install basix, ufl, ffcx
+RUN pip3 install git+https://github.com/FEniCS/basix.git --upgrade && \
     pip3 install git+https://github.com/FEniCS/ufl.git --upgrade  && \
     pip3 install git+https://github.com/FEniCS/ffcx.git --upgrade
 # cpp
