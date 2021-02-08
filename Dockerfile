@@ -21,6 +21,14 @@ RUN apt-get install -y python3-pip && \
 RUN pip3 install cmake && \
     # Some packages need pkg-confg (e.g. PETSc)
     apt-get install -y pkg-config
+# pybind11
+RUN pip3 install pybind11 numba
+# numpy (by default numpy fetches binary build including libblas. 
+# PETSc is built with libopenblas from Ubuntu package. This can lead to conflict.
+# So disable numpy fetching binary and use the Ubuntu package)
+RUN apt-get install libopenblas-dev &&\
+    pip3 install --no-binary="numpy" numpy --upgrade
+
 # cpp
 # latest g++
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test && \
@@ -49,7 +57,7 @@ RUN apt-get install -y \
     mpich
 # HDF5 for mpich
 RUN apt install -y libhdf5-mpich-dev
-# PETSc
+# PETSc (needs mpi and openblas)
 ENV PETSC_DIR=$HOME/petsc
 ENV PETSC_ARCH=linux-gnu-real-64
 # needed by PTScotch
@@ -61,8 +69,6 @@ RUN git clone -b release https://gitlab.com/petsc/petsc.git ${PETSC_DIR} && \
     --with-64-bit-indices=yes \
     --with-fortran-bindings=no \
     --with-shared-libraries \
-    # Install dependencies: BLAS/LAPACK
-    --download-fblaslapack \
     # PTScotch lib
     --download-ptscotch && \
     # Compile
