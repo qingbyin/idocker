@@ -21,8 +21,8 @@ RUN apt-get install -y python3-pip && \
 RUN pip3 install cmake && \
     # Some packages need pkg-confg (e.g. PETSc)
     apt-get install -y pkg-config
-# pybind11
-RUN pip3 install pybind11 numba
+# numba
+RUN pip3 install numba
 # numpy (by default numpy fetches binary build including libblas. 
 # PETSc is built with libopenblas from Ubuntu package. This can lead to conflict.
 # So disable numpy fetching binary and use the Ubuntu package)
