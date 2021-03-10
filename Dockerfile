@@ -39,7 +39,7 @@ RUN pip3 install pytest
 # numpy (by default numpy fetches binary build including libblas. 
 # PETSc is built with libopenblas from Ubuntu package. This can lead to conflict.
 # So disable numpy fetching binary and use the Ubuntu package)
-RUN apt-get install libopenblas-dev &&\
+RUN apt-get install -y libopenblas-dev &&\
     pip3 install --no-binary="numpy" numpy --upgrade
 # Install basix (require Eigen3), ufl, ffcx
 RUN pip3 install git+https://github.com/FEniCS/basix.git --upgrade && \
@@ -48,9 +48,7 @@ RUN pip3 install git+https://github.com/FEniCS/basix.git --upgrade && \
 # boost
 RUN apt-get install -y libboost-dev
 # mpi
-RUN apt-get install -y \
-    libmpich-dev \
-    mpich \
+RUN apt-get install -y libmpich-dev mpich &&\
     pip3 install --no-cache-dir mpi4py
 # HDF5 for mpich
 RUN apt install -y libhdf5-mpich-dev
