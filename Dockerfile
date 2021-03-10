@@ -56,10 +56,10 @@ RUN git clone https://gitlab.com/libeigen/eigen.git ~/eigen && \
     cd ~ && \
     rm -rf ~/eigen
 # Install basix (require Eigen3)
-RUN git clone https://github.com/FEniCS/basix.git --branch main --single-branch
-    cmake -G Ninja -DCMAKE_BUILD_TYPE=Developer -B build-dir -S ./basix
-    cmake --build build-dir --parallel 3
-    cmake --install build-dir
+RUN git clone https://github.com/FEniCS/basix.git --branch main --single-branch &&\
+    cmake -G Ninja -DCMAKE_BUILD_TYPE=Developer -B build-dir -S ./basix &&\
+    cmake --build build-dir --parallel 3 &&\
+    cmake --install build-dir &&\
     pip3 install ./basix/python
 # Install ufl, ffcx
 RUN pip3 install git+https://github.com/FEniCS/ufl.git --upgrade  && \
