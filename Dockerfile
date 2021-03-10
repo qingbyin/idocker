@@ -21,15 +21,6 @@ RUN apt-get install -y python3-pip && \
 RUN pip3 install cmake && \
     # Some packages need pkg-confg (e.g. PETSc)
     apt-get install -y pkg-config
-# mpi4py, numba
-RUN pip3 install --no-cache-dir mpi4py numba
-# pytest
-RUN pip3 install pytest
-# numpy (by default numpy fetches binary build including libblas. 
-# PETSc is built with libopenblas from Ubuntu package. This can lead to conflict.
-# So disable numpy fetching binary and use the Ubuntu package)
-RUN apt-get install libopenblas-dev &&\
-    pip3 install --no-binary="numpy" numpy --upgrade
 # cpp
 # latest g++
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test && \
@@ -38,7 +29,9 @@ RUN add-apt-repository ppa:ubuntu-toolchain-r/test && \
 ENV CXX=/usr/bin/g++-10 \
     CC=/usr/bin/gcc-10
 RUN apt-get install ninja-build
+# -----------------------------------------------------------------------------
 # libs
+# -----------------------------------------------------------------------------
 # latest eigen3
 RUN git clone https://gitlab.com/libeigen/eigen.git ~/eigen && \
     cd ~/eigen && mkdir build && cd build && \
@@ -46,6 +39,15 @@ RUN git clone https://gitlab.com/libeigen/eigen.git ~/eigen && \
     make install && \
     cd ~ && \
     rm -rf ~/eigen
+# numba
+RUN pip3 install --no-cache-dir numba
+# pytest
+RUN pip3 install pytest
+# numpy (by default numpy fetches binary build including libblas. 
+# PETSc is built with libopenblas from Ubuntu package. This can lead to conflict.
+# So disable numpy fetching binary and use the Ubuntu package)
+RUN apt-get install libopenblas-dev &&\
+    pip3 install --no-binary="numpy" numpy --upgrade
 # Install basix (require Eigen3), ufl, ffcx
 RUN pip3 install git+https://github.com/FEniCS/basix.git --upgrade && \
     pip3 install git+https://github.com/FEniCS/ufl.git --upgrade  && \
@@ -55,7 +57,8 @@ RUN apt-get install -y libboost-dev
 # mpi
 RUN apt-get install -y \
     libmpich-dev \
-    mpich
+    mpich \
+    pip3 install --no-cache-dir mpi4py
 # HDF5 for mpich
 RUN apt install -y libhdf5-mpich-dev
 # PETSc (needs mpi and openblas)
