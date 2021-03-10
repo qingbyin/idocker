@@ -41,10 +41,6 @@ RUN pip3 install pytest
 # So disable numpy fetching binary and use the Ubuntu package)
 RUN apt-get install -y libopenblas-dev &&\
     pip3 install --no-binary="numpy" numpy --upgrade
-# Install basix (require Eigen3), ufl, ffcx
-RUN pip3 install git+https://github.com/FEniCS/basix.git --upgrade && \
-    pip3 install git+https://github.com/FEniCS/ufl.git --upgrade  && \
-    pip3 install git+https://github.com/FEniCS/ffcx.git --upgrade
 # boost
 RUN apt-get install -y libboost-dev
 # mpi
@@ -59,6 +55,10 @@ RUN git clone https://gitlab.com/libeigen/eigen.git ~/eigen && \
     make install && \
     cd ~ && \
     rm -rf ~/eigen
+# Install basix (require Eigen3), ufl, ffcx
+RUN pip3 install git+https://github.com/FEniCS/basix.git --upgrade && \
+    pip3 install git+https://github.com/FEniCS/ufl.git --upgrade  && \
+    pip3 install git+https://github.com/FEniCS/ffcx.git --upgrade
 # PETSc (needs mpi and openblas)
 ENV PETSC_DIR=$HOME/petsc
 ENV PETSC_ARCH=linux-gnu-real-64
