@@ -32,13 +32,6 @@ RUN apt-get install ninja-build
 # -----------------------------------------------------------------------------
 # libs
 # -----------------------------------------------------------------------------
-# latest eigen3
-RUN git clone https://gitlab.com/libeigen/eigen.git ~/eigen && \
-    cd ~/eigen && mkdir build && cd build && \
-    cmake .. && \
-    make install && \
-    cd ~ && \
-    rm -rf ~/eigen
 # numba
 RUN pip3 install --no-cache-dir numba
 # pytest
@@ -61,6 +54,13 @@ RUN apt-get install -y \
     pip3 install --no-cache-dir mpi4py
 # HDF5 for mpich
 RUN apt install -y libhdf5-mpich-dev
+# latest eigen3 (require blas)
+RUN git clone https://gitlab.com/libeigen/eigen.git ~/eigen && \
+    cd ~/eigen && mkdir build && cd build && \
+    cmake .. && \
+    make install && \
+    cd ~ && \
+    rm -rf ~/eigen
 # PETSc (needs mpi and openblas)
 ENV PETSC_DIR=$HOME/petsc
 ENV PETSC_ARCH=linux-gnu-real-64
