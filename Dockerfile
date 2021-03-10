@@ -21,14 +21,15 @@ RUN apt-get install -y python3-pip && \
 RUN pip3 install cmake && \
     # Some packages need pkg-confg (e.g. PETSc)
     apt-get install -y pkg-config
-# numba
-RUN pip3 install numba
+# mpi4py, numba
+RUN pip3 install --no-cache-dir mpi4py numba
+# pytest
+RUN pip3 install pytest
 # numpy (by default numpy fetches binary build including libblas. 
 # PETSc is built with libopenblas from Ubuntu package. This can lead to conflict.
 # So disable numpy fetching binary and use the Ubuntu package)
 RUN apt-get install libopenblas-dev &&\
     pip3 install --no-binary="numpy" numpy --upgrade
-
 # cpp
 # latest g++
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test && \
